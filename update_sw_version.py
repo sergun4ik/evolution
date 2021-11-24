@@ -10,6 +10,8 @@ from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from sys import argv
 from re import search
+import napalm
+from getpass import getuser, getpass
 
 def get_active_netbox_devices(nb,tenant_name):
     '''
@@ -25,7 +27,7 @@ def get_active_netbox_devices(nb,tenant_name):
         exit()
     for device in devices:
         device_list.append(device)
-    return device_list
+    return (device_list)
 
     
 def get_sw_version(dev_ip, dev_platform, dev_username, dev_password, enable_password):
@@ -64,7 +66,7 @@ def main():
     for tenant_device in tenant_devices:
         device_ip = search('^[\d\.]+',tenant_device.primary_ip).group()
         for driver in drivers:
-            if driver in device.platform.lower():
+            if driver in tenant_device.platform.lower():
                 device_driver = napalm.get_network_driver(driver)
                 break
         device_connection = device_driver(hostname=device_ip,
