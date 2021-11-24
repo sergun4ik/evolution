@@ -21,7 +21,7 @@ def get_active_netbox_devices(nb,tenant_name):
     device_list = []
     tenant = nb.tenancy.tenants.filter(tenant_name)
     try:
-        devices = nb.dcim.devices.filter(tenant=tenant.slug,state = 'Active')
+        devices = nb.dcim.devices.filter(tenant=tenant.slug, state='Active')
     except:
         print(f"Was unable to collect device information for tenant {tenant_name}. Please, check the spelling")
         exit()
