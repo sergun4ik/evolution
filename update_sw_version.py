@@ -11,7 +11,7 @@ requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from sys import argv
 from re import search
 import napalm
-from getpass import getuser, getpass
+from getpass import getpass
 
 def get_active_netbox_devices(nb,tenant_name):
     '''
